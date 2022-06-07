@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HackerType Dumb Version</title>
+		<style>
+			body{
+				background-color: black;
+			}
+			h1{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			pre{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				font-size: 16px;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			button{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				border: 1px solid green;
+				padding: 6px 12px;
+				cursor: pointer;
+				font-size: 16px;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			input[type="file"] {
+			display: none;
+			}
+			.custom-file-upload {
+				border: 1px solid green;
+				display: inline-block;
+				padding: 6px 12px;
+				cursor: pointer;
+				background-color: black;				
+				color: rgb(54, 230, 0);
+				font-size: 16px;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			#output {
+				height: 85vh;
+
+			}
+		</style>
+		<!--<script type="text/javascript" src="D:\Coding\FakeHackerTyper\TextSource.js"></script> -->
+	</head>
+
+	<body>
+		<div style="height: innerHeight;overflow:auto">
+			<pre id="output"></pre>
+		</div>
+		<footer id= "BottomNavBar" style="height: 25px; border: 2px outset black; border-top-color: rgb(54, 230, 0); padding: 1px 1px; padding-top: 6px">
+			<label for="inputfile" class="custom-file-upload">
+			<i class="fa fa-cloud-upload"></i> Custom Upload
+			</label>
+			<input type="file" name="inputfile" id="inputfile"><button onclick="settingsMenu">Settings</button>
+		</footer>
+		<br>
+		
+		<script>
+			var txtResult;
+			document.getElementById('inputfile').addEventListener('change', function() {
+				  
+				var fr=new FileReader();
+				fr.onload=function(){
+					txtResult=fr.result;
+				}
+				document.addEventListener('keypress', typeOutCustom);
+				document.removeEventListener('keypress', typeOut);
+				  
+				fr.readAsText(this.files[0]);
+			})
+			//index variable for which index of txtsrcs the for loop is at during typeOut()
+			var superIndex = 0;
+			//general purpose index variable for typeOut() and typeOutCustom()
+			var i = 0;
+
+			//if no txt was uploaded the default typeOut() function is mapped
+			document.addEventListener('keypress', typeOut);
+			//prints the default message from the TextSource.js
+			function typeOut(){
+					if(i < textsrcs[superIndex].length){
+						document.getElementById("output").innerHTML= document.getElementById("output").innerHTML + textsrcs[superIndex][i];
+						//document.getElementById("myConsole").innerHTML= document.getElementById("myConsole").innerHTML + "\n" + "superIndex: " + superIndex +  " ," + "i: " + i;
+						i++;
+					}
+					else{
+						superIndex++;
+						i = 0;
+					}
+			}
+			//custom upload of txt doc
+			function typeOutCustom(){
+				if(i < txtResult.length){
+					document.getElementById("output").innerHTML= document.getElementById("output").innerHTML + txtResult[i];
+					i++;
+				}
+			}
+//-------------------------------------
+			function themeChanger(){
+				
+			}
+			
+			function settingsMenu(){
+				//pull up a subwindow type popup thingy
+				themeChanger();
+			}
+		</script>
+	</body>
+</html>

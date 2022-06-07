@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HackerType Dumb Versoin Upload</title>
+		<style>
+			body{
+				background-color: black;
+			}
+			h1{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			p{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				font-size: 16px;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			pre{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				font-size: 16px;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			button{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				font-size: 16px;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}
+			input{
+				color: rgb(54, 230, 0);
+				background-color: black;
+				font-size: 16px;
+				font-family: "Lucida Console", "Courier New", monospace;
+			}	
+		</style>
+	</head>
+	
+	<body>
+		<h1>HackerTyper Rip-off</h1>
+		<p>Click continue if you want the classic HackerTyper experience or click upload if you want to upload a replacement message to be typed out.</p>
+
+		<button onclick="window.location.href='Index.html'">Continue</button>
+		<br>
+		<br>
+		<input type="file" name="inputfile"
+		id="inputfile">
+		<br>
+   
+		<pre id="output"></pre>
+		<script>
+			var tbpText = "";
+			var preprocText;
+			document.getElementById('inputfile').addEventListener('change', function() {
+				  
+				var fr=new FileReader();
+				fr.onload=function(){
+					tbpText=fr.result;
+					preprocText = tbpText;
+					sessionStorage.setItem("preprocText", preprocText);
+				}
+				  
+				fr.readAsText(this.files[0]);
+			})
+		</script>
+	</body>
+</html>
